@@ -1,0 +1,1 @@
+{"name":"babel-plugin","version":"1.0.0","description":"","main":"index.js","scripts":{"build":"babel test.js --out-file test-out.js"},"keywords":[],"author":"","license":"ISC","dependencies":{"@babel/cli":"^7.18.6"}}
