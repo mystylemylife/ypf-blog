@@ -42,7 +42,7 @@ $(document).ready(function () {
 
   //   折叠代码块
   $(".icon-toggle").click(function () {
-    $(this).parents(".highlight").find("table").slideToggle();
+    $(this).parents(".highlight").find("table").slideToggle(100);
     const more = $(this).parents(".highlight").find(".more-text");
     // 图标反转
     if ($(this).hasClass("fa-chevron-up")) {
@@ -50,14 +50,22 @@ $(document).ready(function () {
       $(this).removeClass("fa-chevron-up").addClass("fa-chevron-down");
       //  显示查看更多文字
       more.show();
+      $(this).parents(".highlight").find(".more-text-up").remove();
     } else {
       // 展开
       $(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
       //   隐藏查看更多文字
       more.hide();
+      // 插入收起
+      $(this).parents(".highlight").append(
+        '<i class="fa fa-chevron-up icon-toggle more-text-up" style="color:#fff;position:absolute;cursor:pointer;left:50%;transform:translateX(-50%);color: #98c379;"></i>'
+      );
+      // 解绑点击事件
+      // $(".more-text-up").unbind("click").
     }
   });
-  $(".more-text").click(function () {
+  $('.highlight').on("click", ".more-text,.more-text-up", function () {
     $(this).parents(".highlight").find(".icon-toggle").click();
   });
+
 });
