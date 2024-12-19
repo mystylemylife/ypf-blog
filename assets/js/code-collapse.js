@@ -11,6 +11,10 @@ $(document).ready(function () {
   //   遍历
   $(".highlight").each(function () {
     const target = $(this).find("figcaption span");
+    // 插入查看更多文字
+    $(this).prepend(
+      '<span class="more-text" style="color:#fff;position:absolute;cursor:pointer;left:50%;transform:translateX(-50%);color: #98c379;text-decoration: underline;display:none">more...</span>'
+    );
     if (target && target.text() === "[toggle]") {
       target.hide();
       target.parents(".highlight").find("table").hide();
@@ -20,12 +24,7 @@ $(document).ready(function () {
         .prepend(
           '<i class="fa fa-chevron-down icon-toggle" style="cursor:pointer;margin-right:45px;"></i>'
         );
-      // 插入查看更多文字
-      target
-        .parents(".highlight")
-        .prepend(
-          '<span class="more-text" style="color:#fff;position:absolute;cursor:pointer;left:50%;transform:translateX(-50%);color: #98c379;text-decoration: underline;">more</span>'
-        );
+      target.parents(".highlight").find('.more-text').show()
     } else {
       // 如果高度<=54, 就不显示折叠按钮
       if ($(this).height() <= 54) {
@@ -57,15 +56,16 @@ $(document).ready(function () {
       //   隐藏查看更多文字
       more.hide();
       // 插入收起
-      $(this).parents(".highlight").append(
-        '<i class="fa fa-chevron-up icon-toggle more-text-up" style="color:#fff;position:absolute;cursor:pointer;left:50%;transform:translateX(-50%);color: #98c379;"></i>'
-      );
+      $(this)
+        .parents(".highlight")
+        .append(
+          '<i class="fa fa-chevron-up icon-toggle more-text-up" style="color:#fff;position:absolute;cursor:pointer;left:50%;transform:translateX(-50%);color: #98c379;"></i>'
+        );
       // 解绑点击事件
       // $(".more-text-up").unbind("click").
     }
   });
-  $('.highlight').on("click", ".more-text,.more-text-up", function () {
+  $(".highlight").on("click", ".more-text,.more-text-up", function () {
     $(this).parents(".highlight").find(".icon-toggle").click();
   });
-
 });
