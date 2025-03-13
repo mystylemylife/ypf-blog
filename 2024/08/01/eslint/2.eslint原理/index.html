@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>2.eslint原理 | ypf的博客</title><meta name="author" content="ypf"><meta name="copyright" content="ypf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="调试源码我们要了解eslint原理,需要在vscode中打开一个 javascript调试终端, 然后执行 npx eslint ..., 编辑器会自动定位到运行和调试,但此时没有断点. 然后我们去node_modules&amp;#x2F;eslint中打上一个断点, 重新执行下npx eslint ...就会触发"><link rel="shortcut icon" href="/ypf-blog/img/favicon.png"><link rel="canonical" href="https://mystylemylife.github.io/ypf-blog/2024/08/01/eslint/2.eslint%E5%8E%9F%E7%90%86/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="stylesheet" href="/ypf-blog/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.staticfile.net/font-awesome/6.7.1/css/all.min.css"><script>const GLOBAL_CONFIG = {
   root: '/ypf-blog/',
   algolia: undefined,
-  localSearch: {"path":"https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/search.json","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  localSearch: {"path":"/ypf-blog/search.json","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
   highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
