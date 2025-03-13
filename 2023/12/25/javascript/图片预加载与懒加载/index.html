@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>图片预加载与懒加载 | ypf的博客</title><meta name="author" content="ypf"><meta name="copyright" content="ypf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="预加载和懒加载的字眼总会看到。其实预加载和懒加载不仅仅是用于加载图片资源。其他资源，文字，视频。都可以。但实际工作过程中，我们较常用或较需要使用的场景就是加载图片资源。  什么是图片懒加载?懒加载，也叫延迟加载图片资源，指的是图片在可视范围才进行加载。一般图片较多的电商网站用的比较多。 原理 所有"><link rel="shortcut icon" href="/ypf-blog/img/favicon.png"><link rel="canonical" href="https://mystylemylife.github.io/ypf-blog/2023/12/25/javascript/%E5%9B%BE%E7%89%87%E9%A2%84%E5%8A%A0%E8%BD%BD%E4%B8%8E%E6%87%92%E5%8A%A0%E8%BD%BD/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="stylesheet" href="/ypf-blog/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.staticfile.net/font-awesome/6.7.1/css/all.min.css"><script>const GLOBAL_CONFIG = {
   root: '/ypf-blog/',
   algolia: undefined,
-  localSearch: {"path":"/ypf-blog/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  localSearch: {"path":"/ypf-blog/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
   highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
