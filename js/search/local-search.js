@@ -256,6 +256,8 @@ window.addEventListener('load', () => {
     const keywords = searchText.split(/[-\s]+/)
     const container = document.getElementById('local-search-results')
     let resultItems = []
+    console.log(searchText,88888);
+    
     if (searchText.length > 0) {
     // Perform local searching
       resultItems = localSearch.getResultItems(keywords)
