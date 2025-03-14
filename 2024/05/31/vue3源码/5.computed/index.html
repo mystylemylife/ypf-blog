@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>5.computed | ypf的博客</title><meta name="author" content="ypf"><meta name="copyright" content="ypf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="使用 computed是通过ComputedRefImpl类生成, 具有以下特点1.没有使用,不会执行2.具有缓存机制, 多次调用只执行一次3.具有依赖收集,当依赖的值发生变化时,才会重新执行4.要修改计算属性的值，相当于修改计算属性的依赖变量,set的参数就是传入的值  函数12345678910"><link rel="shortcut icon" href="/ypf-blog/img/favicon.png"><link rel="canonical" href="https://mystylemylife.github.io/ypf-blog/2024/05/31/vue3%E6%BA%90%E7%A0%81/5.computed/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.staticfile.net/font-awesome/6.7.1/css/all.min.css"><script>const GLOBAL_CONFIG = {
   root: '/ypf-blog/',
   algolia: undefined,
-  localSearch: {"path":"https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  localSearch: {"path":"/ypf-blog/search.json","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
   highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
