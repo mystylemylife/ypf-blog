@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>git标签-tag | ypf的博客</title><meta name="author" content="ypf"><meta name="copyright" content="ypf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="tag是什么?tag相当于commitId的别名，不依赖分支，和commit绑定，一般我们用来：  上线后打个tag推上去，如20230201版本号， 或者在开发中某个功能打个tag。 这样可以快速切换到该tag下（如果通过commitId切换就得要查找那么长的commitId，麻烦）  直接看代码"><link rel="shortcut icon" href="/ypf-blog/img/favicon.png"><link rel="canonical" href="https://mystylemylife.github.io/ypf-blog/2025/08/20/git/git%E6%A0%87%E7%AD%BE-tag/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.staticfile.net/font-awesome/6.7.1/css/all.min.css"><script>const GLOBAL_CONFIG = {
+  root: '/ypf-blog/',
+  algolia: undefined,
+  localSearch: {"path":"/ypf-blog/search.json","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"git标签-tag",isPost:!0,isHome:!1,isHighlightShrink:void 0,isToc:!0,postUpdate:"2025-08-20 15:37:33"}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/assets/css/atom-one-dark.css"><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/png;base64,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" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/ypf-blog/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/ypf-blog/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/ypf-blog/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/ypf-blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> gwy</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ypf-blog/categories/gwy/LFTT/"><span>LFTT</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/ypf-blog/" title="ypf的博客"><span class="site-name">ypf的博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/ypf-blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> gwy</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ypf-blog/categories/gwy/LFTT/"><span>LFTT</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">git标签-tag</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-08-20T07:37:33.039Z" title="发表于 2025-08-20 15:37:33">2025-08-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-08-20T07:37:33.059Z" title="更新于 2025-08-20 15:37:33">2025-08-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/ypf-blog/categories/git/">git</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="tag是什么"><a href="#tag是什么" class="headerlink" title="tag是什么?"></a>tag是什么?</h2><p>tag相当于commitId的别名，不依赖分支，和commit绑定，一般我们用来：</p><ul><li>上线后打个tag推上去，如20230201版本号， 或者在开发中某个功能打个tag。 这样可以快速切换到该tag下（如果通过commitId切换就得要查找那么长的commitId，麻烦）</li></ul><p>直接看代码:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1.打tag</span><br><br><span class="hljs-comment"># 当前最新/指定commit打tag</span><br>$ git tag 标签名 [commitId]<br><span class="hljs-comment"># 打带备注信息的tag</span><br>$ git tag -a 标签名 -m [commitId] <span class="hljs-string">&quot;备注信息&quot;</span>  <br><br><span class="hljs-comment"># 2.查看tag</span><br><br><span class="hljs-comment"># 查看所有tag</span><br>  git tag<br><span class="hljs-comment"># 筛选出tag1，tag2</span><br>  git tag -l 标签名称1 标签名2<br><span class="hljs-comment"># 查看tag具体信息</span><br>  git show 标签名称<br><br><span class="hljs-comment"># 3.删除tag</span><br><br><span class="hljs-comment"># 删除本地tag</span><br>  git tag -d 标签名称<br><span class="hljs-comment"># 删除远程tag</span><br>  git push origin --delete tag 1.0.0<br>  或者<br>  git push origin :refs/tags/1.0.0<br><br><br><span class="hljs-comment"># 4. 上传tag</span><br><br><span class="hljs-comment">#上传所有tag</span><br>  git push origin --tags<br><span class="hljs-comment">#上传指定tag</span><br>  git push origin tag名<br><br><br><span class="hljs-comment"># 5. 切换tag</span><br>与分支管理一样，我们也是可以直接切换到某个 tag 上去的，切换完会提示你当前处于一个 <span class="hljs-string">&quot;detached HEAD&quot;</span> 状态，<br>此时我们不在任何分支上，处于游离状态（tag 相当于是一个快照，我们是不能直接更改它的代码），但可以基于这个 tag 创建一个分支<br><span class="hljs-comment">#先切换到指定tag</span><br>$ git checkout tag名<br><span class="hljs-comment">#在此tag上创建分支</span><br>$ git checkout -b [newbranchname] [tagname]<br><br></code></pre></td></tr></table></figure><p>切换tag的截图</p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="images/tag.jpg"><blockquote><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1494508">Git打标签与版本控制规范</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7074777378714550303">git tag的使用</a></p></blockquote></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://mystylemylife.github.io/ypf-blog">ypf</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://mystylemylife.github.io/ypf-blog/2025/08/20/git/git%E6%A0%87%E7%AD%BE-tag/">https://mystylemylife.github.io/ypf-blog/2025/08/20/git/git%E6%A0%87%E7%AD%BE-tag/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mystylemylife.github.io/ypf-blog" target="_blank">ypf的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/ypf-blog/2025/08/20/git/git%E7%AE%80%E5%86%99-alias/" title="git简写-alias"><div class="cover" style="background:var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">git简写-alias</div></div></a></div><div class="next-post pull-right"><a href="/ypf-blog/2025/08/20/git/git%E6%9A%82%E5%AD%98-stash/" title="git暂存-stash"><div class="cover" style="background:var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">git暂存-stash</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tag%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">tag是什么?</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2025 By ypf</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/main.min.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.8.0/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script src="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/assets/js/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/assets/js/code-collapse.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span> 数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/search/local-search.min.js"></script></div></div></body></html>

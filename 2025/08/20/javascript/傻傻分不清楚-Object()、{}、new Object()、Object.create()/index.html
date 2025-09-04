@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>傻傻分不清楚-Object()、{}、new Object()、Object.create() | ypf的博客</title><meta name="author" content="ypf"><meta name="copyright" content="ypf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="{}、Object()、new Object()我们平常工作中一般用let obj&amp;#x3D;&amp;amp;#123;&amp;amp;#125;对象字面量的方法来创建对象.但其实创建对象还有一些其它方式,如:Object() new Object() Object.create().下面我们就来具体介绍这些方法的区别. let tes"><link rel="shortcut icon" href="/ypf-blog/img/favicon.png"><link rel="canonical" href="https://mystylemylife.github.io/ypf-blog/2025/08/20/javascript/%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A-Object()%E3%80%81%7B%7D%E3%80%81new%20Object()%E3%80%81Object.create()/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.staticfile.net/font-awesome/6.7.1/css/all.min.css"><script>const GLOBAL_CONFIG = {
+  root: '/ypf-blog/',
+  algolia: undefined,
+  localSearch: {"path":"/ypf-blog/search.json","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"傻傻分不清楚-Object()、{}、new Object()、Object.create()",isPost:!0,isHome:!1,isHighlightShrink:void 0,isToc:!0,postUpdate:"2025-08-20 15:37:34"}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/assets/css/atom-one-dark.css"><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/png;base64,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" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/ypf-blog/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/ypf-blog/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/ypf-blog/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/ypf-blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> gwy</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ypf-blog/categories/gwy/LFTT/"><span>LFTT</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/ypf-blog/" title="ypf的博客"><span class="site-name">ypf的博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/ypf-blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> gwy</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ypf-blog/categories/gwy/LFTT/"><span>LFTT</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">傻傻分不清楚-Object()、{}、new Object()、Object.create()</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-08-20T07:37:34.666Z" title="发表于 2025-08-20 15:37:34">2025-08-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-08-20T07:37:34.696Z" title="更新于 2025-08-20 15:37:34">2025-08-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/ypf-blog/categories/javascript/">javascript</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/ypf-blog/categories/javascript/%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A/">傻傻分不清楚</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="、Object-、new-Object"><a href="#、Object-、new-Object" class="headerlink" title="{}、Object()、new Object()"></a>{}、Object()、new Object()</h2><p>我们平常工作中一般用<code>let obj=&#123;&#125;</code>对象字面量的方法来创建对象.但其实创建对象还有一些其它方式,如:<code>Object()</code> <code>new Object()</code> <code>Object.create()</code>.下面我们就来具体介绍这些方法的区别.</p><pre><code>let test=&#123;a:1&#125;
+let test1=Object(&#123;a:1&#125;) //不传就是空对象&#123;&#125;
+let test2=new Object(&#123;a:1&#125;) //不传就是空对象&#123;&#125;
+</code></pre><p>我们打印三个结果<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="images/1894758-ae340c8057bbb518.png" width="50%" height="50%"></p><p>从图中我们可以看出,三个结果一模一样,并且原型都继承了<code>Object.prototype</code>,我们总结下</p><ol><li>通过字面量的方式和函数的方式都可以用来创建对象</li><li>当以非构造函数形式被调用时(也就是当成函数执行时)，Object 的行为等同于 new Object()。参考mdn官网<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>一节. 简单来说, new Object()和Object()是一样的,<strong>new可以省略</strong></li></ol><p>注意,上面我们调用Object时候传递的参数是个对象,现在我们传递其它类型的参数看看</p><pre><code>let test3=new Object(1)
+let test4=new Object(&quot;1&quot;)
+let test5=new Object([1])
+let test6=new Object(true)
+</code></pre><p>打印4个结果</p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="images/1894758-a36b9ce1972ccaac.png" width="50%" height="50%"> <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="images/1894758-7d4e3c879299a48f.png" width="50%" height="50%"><p>我们发现,Object构造函数会根据传入的值的类型返回相应的基本包装类型的实例(对象包装器),我们也可以给其进行操作</p><pre><code>let test3=new Object(1)
+test3.a=2
+console.log(test3 instanceof Number);//true
+console.log(test3); //实例,引用类型
+let a = Number(1);//这是转型函数，其它的还有String()、 Boolean()、 Array()
+a.number=2 //不能操作,属于基本数据类型
+console.log(a); //所以结果为1
+</code></pre><p>打印出的test3结果如下</p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="images/1894758-dc3c8c310cec59fc.png" width="50%" height="50%"><p>注意:<br>上面我们说了对象字面量、构造函数创建对象,下面我们单独来说下<code>Object.create()</code>,因为它比较特别.</p><h2 id="Object-create"><a href="#Object-create" class="headerlink" title="Object.create()"></a>Object.create()</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create">mdn定义</a> : Object.create()方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__。</p><p>语法:</p><pre><code>Object.create(proto，propertiesObject)
+</code></pre><ul><li>proto:新创建对象的原型对象,必填</li><li>propertiesObject:可选.参数和 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2aa5a4ce0883">Object.defineProperties()</a> 的descriptor属性描述符一样.</li></ul><p>返回结果:是一个新对象，带着指定的原型对象和属性</p><h3 id="参数proto"><a href="#参数proto" class="headerlink" title="参数proto"></a>参数proto</h3><p>如果不理解,我们直接看例子</p><pre><code>var test1 = Object.create();
+console.log(test1);
+</code></pre><p>报错:</p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="images/1894758-7fb44ede963b212a.png" width="50%" height="50%"><p>提示参数必须只能为object或者null,大家可以试下,传递unedfined、数字啥的都会报同样的错<br>继续更改代码,</p><pre><code>let test1 = Object.create(null);
+let test2=&#123;&#125;
+console.log(1,test1); //&#123;&#125; //无原型
+console.log(2,test2); //&#123;&#125; 注意:虽然都为空对象,但是test2有原型
+test1.a=1
+console.log(3,test1); //&#123;a:1&#125;
+console.log(4,test1.a); //1
+console.log(test1 instanceof Object); //false
+console.log(test2 instanceof Object); //true
+</code></pre><p>打印结果</p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="images/1894758-f08032029418d36c.png" width="50%" height="50%"><p>我们发现,如果传递null,生成的对象,原型是空的,在该对象上没有继承 Object.prototype 原型链上的属性或者方法,例如：toString(), hasOwnProperty()等方法</p><p>我们现在更改传递参数,</p><pre><code>let test1 = Object.create(&#123;a:1&#125;);
+let test2=&#123;a:1&#125;
+console.log(1,test1); //&#123;&#125; 
+console.log(2,test2); //&#123;a:1&#125;
+console.log(test1 instanceof Object); //true
+console.log(test1.a); //1
+console.log(test2 instanceof Object); //true
+console.log(test2.a); //1
+</code></pre><p>打印结果如下:</p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="images/1894758-a33cf49a4f5bceb5.png" width="50%" height="50%"><p>我们发现,我们<strong>传递的对象被赋予到新生成对象的原型上</strong>.现在在回过头来看定义,大家应该就能理解了.所以</p><pre><code>let test = &#123;&#125;;
+// 以字面量方式创建的空对象就相当于:
+let test = Object.create(Object.prototype);
+console.log(test instanceof Object); //true
+</code></pre><p>接下来,我们看第二个参数</p><h3 id="propertiesObject"><a href="#propertiesObject" class="headerlink" title="propertiesObject"></a>propertiesObject</h3><p>我们上面讲了,propertiesObject和Object.defineProperties的属性描述符一致,现在举个例子:</p><pre><code>let test1 = Object.create(&#123;a:1&#125;,&#123;
+    // a会成为所创建对象test1的属性
+    b:&#123;
+        value:1,
+    &#125;
+&#125;);
+console.log(test1);
+</code></pre><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="images/1894758-cd9697002b7c11a3.png" width="50%" height="50%"><p>我们更改代码</p><pre><code> let test1 = Object.create(&#123;a:1&#125;,&#123;
+    // a会成为所创建对象test1的属性
+    b:&#123;
+        value:1,
+    &#125;
+&#125;);
+test1.a=2
+test1.b=2
+console.log(test1)
+</code></pre><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="images/1894758-681577e3a241e14a.png" width="50%" height="50%"><p>我们发现,</p><ul><li><p>我们无法更改b的值,因为默认writable为false,改为true即可</p></li><li><p>我们更改a的值,但是test1对象上面没有a属性,实际a属性在原型上,所以相当于新增,所以我们如果更改,<code>test1.__proto__.a=2</code>即可</p></li><li><p>propertiesObject中定义的对象属性才会适用于属性描述符如writable等,原型上的属性(即第一个参数里的属性)不适用,所以我们可以进行读写操作</p><pre><code>  let test1 = Object.create(&#123;a:1&#125;,&#123;
+      // a会成为所创建对象test1的属性
+      b:&#123;
+          value:1,
+          writable:true
+          //其它参数和Object.defineProperties一样,就不一一介绍了
+      &#125;
+  &#125;);
+  test1.b=2
+  console.log(test1)
+</code></pre></li></ul><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="images/1894758-eed22f0dd71543a5.png" width="50%" height="50%"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://mystylemylife.github.io/ypf-blog">ypf</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://mystylemylife.github.io/ypf-blog/2025/08/20/javascript/%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A-Object()%E3%80%81%7B%7D%E3%80%81new%20Object()%E3%80%81Object.create()/">https://mystylemylife.github.io/ypf-blog/2025/08/20/javascript/%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A-Object()%E3%80%81%7B%7D%E3%80%81new%20Object()%E3%80%81Object.create()/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mystylemylife.github.io/ypf-blog" target="_blank">ypf的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/ypf-blog/2025/08/20/javascript/%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A-call%E3%80%81apply%E3%80%81bind/" title="傻傻分不清楚-call、apply、bind"><div class="cover" style="background:var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">傻傻分不清楚-call、apply、bind</div></div></a></div><div class="next-post pull-right"><a href="/ypf-blog/2025/08/20/javascript/%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A-%20==%E5%92%8C===%E5%92%8CObject.is/" title="傻傻分不清楚- ==和===和Object.is"><div class="cover" style="background:var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">傻傻分不清楚- ==和===和Object.is</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%80%81Object-%E3%80%81new-Object"><span class="toc-number">1.</span> <span class="toc-text">{}、Object()、new Object()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-create"><span class="toc-number">2.</span> <span class="toc-text">Object.create()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0proto"><span class="toc-number">2.1.</span> <span class="toc-text">参数proto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#propertiesObject"><span class="toc-number">2.2.</span> <span class="toc-text">propertiesObject</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2025 By ypf</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/main.min.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.8.0/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script src="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/assets/js/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/assets/js/code-collapse.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span> 数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/search/local-search.min.js"></script></div></div></body></html>

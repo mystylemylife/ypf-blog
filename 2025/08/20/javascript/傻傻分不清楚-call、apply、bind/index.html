@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>傻傻分不清楚-call、apply、bind | ypf的博客</title><meta name="author" content="ypf"><meta name="copyright" content="ypf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="call、apply、bind作用在JavaScript中，call、apply和bind是Function对象自带的三个方法。这三个函数的存在意义是什么？答案就是改变函数运行时的this指向。下面我们通过实际例子来介绍这三个方法的使用和区别。 call 语法：fn.call(thisArg,arg"><link rel="shortcut icon" href="/ypf-blog/img/favicon.png"><link rel="canonical" href="https://mystylemylife.github.io/ypf-blog/2025/08/20/javascript/%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A-call%E3%80%81apply%E3%80%81bind/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.staticfile.net/font-awesome/6.7.1/css/all.min.css"><script>const GLOBAL_CONFIG = {
+  root: '/ypf-blog/',
+  algolia: undefined,
+  localSearch: {"path":"/ypf-blog/search.json","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"傻傻分不清楚-call、apply、bind",isPost:!0,isHome:!1,isHighlightShrink:void 0,isToc:!0,postUpdate:"2025-08-20 15:37:34"}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/assets/css/atom-one-dark.css"><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/png;base64,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" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/ypf-blog/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/ypf-blog/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/ypf-blog/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/ypf-blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> gwy</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ypf-blog/categories/gwy/LFTT/"><span>LFTT</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/ypf-blog/" title="ypf的博客"><span class="site-name">ypf的博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/ypf-blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> gwy</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ypf-blog/categories/gwy/LFTT/"><span>LFTT</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">傻傻分不清楚-call、apply、bind</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-08-20T07:37:34.736Z" title="发表于 2025-08-20 15:37:34">2025-08-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-08-20T07:37:34.737Z" title="更新于 2025-08-20 15:37:34">2025-08-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/ypf-blog/categories/javascript/">javascript</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/ypf-blog/categories/javascript/%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A/">傻傻分不清楚</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h1 id="call、apply、bind作用"><a href="#call、apply、bind作用" class="headerlink" title="call、apply、bind作用"></a>call、apply、bind作用</h1><p>在JavaScript中，call、apply和bind是Function对象自带的三个方法。这三个函数的存在意义是什么？答案就是<strong>改变函数运行时的this指向</strong>。下面我们通过实际例子来介绍这三个方法的使用和区别。</p><h1 id="call"><a href="#call" class="headerlink" title="call"></a>call</h1><blockquote><p>语法：fn.call(thisArg,arg1,arg2,…)</p></blockquote><p>thisArg:函数fn运行时，该函数中的this绑定到thisArg上。<br>arg1,arg2,…：函数fn所需的参数,是个list</p><p><strong>我们直接看例子：</strong></p><pre><code>var a =&#123;
+    name : &quot;test&quot;,
+    fn : function (a,b) &#123;
+        console.log(this.name, a + b)
+    &#125;
+&#125;
+var b=&#123;name:&#39;test1&#39;&#125;
+a.fn(1,2) //test 3
+a.fn.call(b,1,2) //test1 3
+</code></pre><p>执行 <code>a.fn(1,2)</code>，fn中的this指向a，所以输出 <code>test 3</code><br>执行 <code>a.fn.call(b,1,2)</code>，通过call改变了fn中的this指向为b，所以输出 <code>test1 3</code></p><p><strong>注意事项：</strong></p><ol><li>thisArg不传，或者传null，undefined， 函数中的this指向window对象</li><li>thisArg为原始值（数字，字符串，布尔值），函数中this指向该原始值的自动包装对象（如 String、Number、Boolean）</li><li>thisArg为一个对象，函数中的this指向这个对象</li><li>thisArg为一个函数名，函数中的this指向该函数</li><li>前四点是默认在非严格模式下，如果在严格模式下，会略有不同。</li></ol><p><strong>我们直接看例子：</strong></p><pre><code>function a(params) &#123;
+    console.log(this);
+&#125;
+function b() &#123;&#125;
+var obj = &#123;
+    name: &#39;这是一个屌丝&#39;
+&#125;;
+
+//                  正常模式下              严格模式下
+a.call();           //window               undefined
+a.call(null);       //window               null
+a.call(undefined);  //window               undefined
+a.call(1);          //Number&#123;1&#125;            1
+a.call(&#39;1&#39;);         //String&#123;&#39;1&#39;&#125;           &#39;1&#39;
+a.call(true);       //Boolean&#123;true&#125;        true
+a.call(b);          //function b()&#123;&#125;       function b()&#123;&#125;
+a.call(obj);        //Object               Object
+</code></pre><h1 id="apply"><a href="#apply" class="headerlink" title="apply"></a>apply</h1><blockquote><p>语法：fn.apply(thisArg,[arg1,arg2,…])或者 fn.apply(thisArg,{0:arg1,1:arg2,…,lenght:总个数})</p></blockquote><p>thisArg:函数fn运行时，该函数中的this绑定到thisArg上。<br>[arg1,arg2,…]或者形如{0:arg1,1:arg2,…,lenght:总个数}：函数fn所需的参数,是个数组或者类数组,call函数会自动将数组或类数组的每个值分开成列表然后给函函数fn</p><p>例子和上面一样，只需要把<code>call</code>换成<code>apply</code>即可。其他都一样，包括上面call的几点注意事项即不传或者传null等。</p><h1 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h1><blockquote><p>语法：fn.bind(thisArg,arg1,arg2,…)()</p></blockquote><p>thisArg:函数fn运行时，该函数中的this绑定到thisArg上。<br>arg1,arg2,…：函数fn所需的参数,是个list</p><p><strong>bind其实和call类似,包括上面call的几点注意事项即不传或者传null等，只不过后面多个<code>（）</code>。我们直接看例子</strong></p><pre><code> var a = &#123;
+    name: &quot;test&quot;,
+    fn: function (a, b) &#123;
+        console.log(this.name, a + b)
+    &#125;
+&#125;
+var b = &#123;
+    name: &#39;test1&#39;
+&#125;
+a.fn.bind(b, 1, 2)
+</code></pre><p>运行上面代码，我们发现控制台并没有输出，所以我们可以看出bind 是创建一个新的函数，我们<strong>必须要手动去调用</strong>。我们更改代码：</p><pre><code>var a = &#123;
+    name: &quot;test&quot;,
+    fn: function (a, b) &#123;
+        console.log(this.name, a + b)
+    &#125;
+&#125;
+var b = &#123;
+    name: &#39;test1&#39;
+&#125;
+a.fn.bind(b, 1, 2) //test1 3
+</code></pre><p>上面我们手动调用，发现正确输出结果。</p><h1 id="call-apply-bind三者区别总结"><a href="#call-apply-bind三者区别总结" class="headerlink" title="call apply bind三者区别总结"></a>call apply bind三者区别总结</h1><p>1.call和apply用法一样，唯一的区别是call的参数为列表，apply参数为数组<br>2.bind和call用法一样，唯一的区别是call会自执行函数，bind需要手动调用函数</p><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><pre><code>var Person = function (name, age) &#123;
+    this.name = name;
+    this.age = age;
+&#125;;
+var Girl = function (name) &#123;
+    Person.call(this, name);
+&#125;;
+var Boy = function (name, age) &#123;
+    Person.apply(this, arguments);
+&#125;
+var Boy1 = function (name, age) &#123;
+    Person.bind(this, name)();
+&#125;
+var g = new Girl(&#39;xiaohong&#39;);
+var b = new Boy(&#39;xiaoming&#39;, 100);
+var b1 = new Boy1(&#39;xiaowang&#39;, 100);
+console.log(g); //&#123;name: &quot;xiaohong&quot;, age: undefined&#125;
+console.log(b); //&#123;name: &quot;xiaoming&quot;, age: 100&#125;
+console.log(b1); //&#123;name: &quot;xiaowang&quot;, age: undefined&#125;
+</code></pre><p>上面例子，我们定义了四个构造函数，通过new实例化调用Girl、Boy、Boy1这三个构造函数，在这三个构造函数中分别使用call、apply、bind继承Person的属性。<br>我们来看下它到底是怎么继承的?</p><pre><code> var Person = function (name, age) &#123;
+      this.name = name;
+      this.age = age;
+&#125;;
+var Girl = function (name) &#123;
+    Person.call(this, name);
+&#125;;  
+var g = new Girl(&#39;xiaohong&#39;);
+</code></pre><p>1.先执行<code>g=new Girl(&#39;xiaohong&#39;);</code> 此时执行Girl函数,并执行函数里面的代码<code>Person.call(this, name);</code><br>2.<code>Person.call(this, name);</code>中的this指向调用方,即实例g. 通过call方法后,会调用person函数,本来person的this指向被调用方,此时person函数的this被改变成实例g<br>3.所以就变成<code>g.name=name; g.age=age</code><br>4.所以通过girl实例化出的g相当于继承了person里面的属性</p><h2 id="求数组中的最大和最小值"><a href="#求数组中的最大和最小值" class="headerlink" title="求数组中的最大和最小值"></a>求数组中的最大和最小值</h2><pre><code>var ary = [0, 1, 1, 3, 4, 5, 6, 7];
+console.log(Math.max(0, 1, 1, 3, 4, 5, 6, 7)); //7
+console.log(Math.min(0, 1, 1, 3, 4, 5, 6, 7)); //0
+var max = Math.max.apply(null, ary);
+var min = Math.min.apply(null, ary);
+console.log(max,min); //7 0
+</code></pre><p>上面例子可以看出，正常情况下，<code>Math.max和Math.min</code>的参数为必须为列表，上面只用<code>0-7</code>八个数字还好，但如果数据很多，都放到参数会比较麻烦。</p><p>所以我们借助apply可以将数组转换成列表的功能，这样我们就可以直接传递一个变量了。第一个参数这里使用<code>null</code>，实际换成其他都可以（如随便一个字符串、数字、对象等），这里主要使用的是call函数的 数组转列表功能。</p><h2 id="类数组转数组"><a href="#类数组转数组" class="headerlink" title="类数组转数组"></a>类数组转数组</h2><pre><code>Array.prototype.slice.call(arrayLike) 或者 Array.prototype.slice.apply(arrayLike)
+</code></pre><p>具体可以戳这<a href="">javascript中的伪（类）数组和数组</a></p><h2 id="数组追加"><a href="#数组追加" class="headerlink" title="数组追加"></a>数组追加</h2><p>在js中我们往数组追加元素，一般使用push方法。</p><pre><code>  var arr1 = [1,2,3];
+  var arr2 = [4,5,6];
+  arr1.push(4,5,6)
+  console.log(arr1) //[1,2,3,4,5,6]
+</code></pre><p>我们也可以使用apply方法：</p><pre><code>var arr1 = [1,2,3];
+var arr2 = [4,5,6];
+[].push.apply(arr1,arr2)
+console.log(arr1) //[1,2,3,4,5,6]
+</code></pre><p>上面代码意思表示：[]调用push方法，然后通过call将push方法中的this指向arr1，并将arr2转变成参数列表。这样就达到合并的目的。</p><h2 id="判断变量类型"><a href="#判断变量类型" class="headerlink" title="判断变量类型"></a>判断变量类型</h2><pre><code>Object.prototype.toString.call/apply(object);
+</code></pre><p>具体详见另一篇文章<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1009ee38e5f1">toString()和Object.prototype.toString.call()</a></p></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://mystylemylife.github.io/ypf-blog">ypf</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://mystylemylife.github.io/ypf-blog/2025/08/20/javascript/%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A-call%E3%80%81apply%E3%80%81bind/">https://mystylemylife.github.io/ypf-blog/2025/08/20/javascript/%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A-call%E3%80%81apply%E3%80%81bind/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mystylemylife.github.io/ypf-blog" target="_blank">ypf的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/ypf-blog/2025/08/20/javascript/%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A-preload%E3%80%81prefetch%E3%80%81dns-prefetch%E3%80%81defer%E5%92%8Casync/" title="傻傻分不清楚-preload、prefetch、dns-prefetch、defer和async"><div class="cover" style="background:var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">傻傻分不清楚-preload、prefetch、dns-prefetch、defer和async</div></div></a></div><div class="next-post pull-right"><a href="/ypf-blog/2025/08/20/javascript/%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A-Object()%E3%80%81%7B%7D%E3%80%81new%20Object()%E3%80%81Object.create()/" title="傻傻分不清楚-Object()、{}、new Object()、Object.create()"><div class="cover" style="background:var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">傻傻分不清楚-Object()、{}、new Object()、Object.create()</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#call%E3%80%81apply%E3%80%81bind%E4%BD%9C%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">call、apply、bind作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#call"><span class="toc-number">2.</span> <span class="toc-text">call</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#apply"><span class="toc-number">3.</span> <span class="toc-text">apply</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#bind"><span class="toc-number">4.</span> <span class="toc-text">bind</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#call-apply-bind%E4%B8%89%E8%80%85%E5%8C%BA%E5%88%AB%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">call apply bind三者区别总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-number">6.1.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C%E6%9C%80%E5%B0%8F%E5%80%BC"><span class="toc-number">6.2.</span> <span class="toc-text">求数组中的最大和最小值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E6%95%B0%E7%BB%84%E8%BD%AC%E6%95%B0%E7%BB%84"><span class="toc-number">6.3.</span> <span class="toc-text">类数组转数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E8%BF%BD%E5%8A%A0"><span class="toc-number">6.4.</span> <span class="toc-text">数组追加</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="toc-number">6.5.</span> <span class="toc-text">判断变量类型</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2025 By ypf</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/main.min.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.8.0/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script src="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/assets/js/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/gh/mystylemylife/ypf-blog/assets/js/code-collapse.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span> 数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/search/local-search.min.js"></script></div></div></body></html>
